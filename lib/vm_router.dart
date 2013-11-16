@@ -162,11 +162,13 @@ class execBroker extends Expando
 
 }
 
-abstract class execResult extends Expando
+class execResult extends Expando
 {
+  Map<String,dynamic> updateStats(Map<String,dynamic> localStats)
+  {
 
+  }
 }
-
 
 abstract class VMrouter implements VMinterface
 {
@@ -194,8 +196,55 @@ abstract class VMrouter implements VMinterface
     if (msgid==null) return;
     switch(msgid)
     {
-      case _msg.__router_setchild:
-        this.setChildPort(msg[__router_setchild.childKey],msg[__router_setchild.childKey]);
+      case _msg.__update:
+        List<Map<String,dynamic>> stats=msg[__update.stats];
+        List<Map<String,dynamic>> rules=msg[__update.rules];
+        List<Map<String,dynamic>> child=msg[__update.child];
+        if (stats!=null)
+          for (var stat in stats)
+          {
+            String key=stat[___rtstats.statKey];
+            dynamic value=stat[___rtstats.statValue];
+            bool unset=stat[___rtstats.isUnset];
+
+            if (unset)
+              unsetLocalStat(key);
+            else
+              setLocalStat(key,value);
+          }
+        if (rules!=null)
+          for (var rule in rules)
+          {
+            String msgString=rule[___rtrules.msgPattern];
+            String sourceKey=rule[___rtrules.sourceKey];
+            String condition=rule[___rtrules.ruleCondition];
+            String execution=rule[___rtrules.ruleExecution];
+            if (msgString!=null)
+            {
+              var msgPatterns=getMsgPattern(msgString);
+              var condFunc=parseCondition(condition);
+              var execFunc=parseExecution(execution);
+              if (execution==null)
+                msgPatterns.forEach((msgPattern){
+                  unsetRule(msgPattern);
+                });
+              else
+                msgPatterns.forEach((msgPattern){
+                  setRule(msgPattern, sourceKey, condFunc, execFunc);
+                });
+            }
+          }
+        if (child!=null)
+          for (var chil in child)
+          {
+            String key=chil[___rtchild.childKey];
+            SendPort port=chil[___rtchild.ChildPort];
+
+            if (port==null)
+              unsetChildPort(key);
+            else
+              setChildPort(key,port);
+          }
         break;
       default:
         for (var msgpattern in listenerMap.keys)
@@ -216,7 +265,7 @@ abstract class VMrouter implements VMinterface
               {
                 if (!rtcondition(new condBroker()..[CDB._vminstanc]=this
                                                   ..[CDB._sourcemsg]=msg
-                                                  ..[CDB._localstat]=localStats))
+                                                  ..[CDB._localstat]={}.addAll(localStats)))
                   continue;
               }
               catch (e)
@@ -232,11 +281,12 @@ abstract class VMrouter implements VMinterface
             if (rtexecution!=null)
               try
               {
-                if (rtcondition(new execBroker()..[ECB._vminstanc]=this
-                                                ..[ECB._sourcemsg]=msg
-                                                ..[ECB._localstat]=localStats)!=null)
+                execResult result=rtexecution(new execBroker()..[ECB._vminstanc]=this
+                                                        ..[ECB._sourcemsg]=msg
+                                                        ..[ECB._localstat]={}.addAll(localStats));
+                if (result!=null)
                 {
-                  //for future
+                  localStats=result.updateStats(localStats);
                 }
                 continue;
               }
@@ -302,6 +352,30 @@ abstract class VMrouter implements VMinterface
   SendPort unsetChildPort(String vmKey)
   {
     return childrenMap.remove(vmKey);
+  }
+
+  void setLocalStat(String key,value)
+  {
+    localStats[key]=value;
+  }
+
+  dynamic getLocalStat(String key)
+  {
+    return localStats[key];
+  }
+
+  dynamic unsetLocalStat(String key)
+  {
+    return localStats.remove(key);
+  }
+
+  dynamic parseCondition(String funcode)
+  {
+
+  }
+  dynamic parseExecution(String funcode)
+  {
+
   }
 
   void reportError(dynamic errmsg)

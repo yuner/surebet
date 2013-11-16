@@ -21,7 +21,7 @@ class _msg
   static const __init='__init';
   static const __error='__error';
   static const __inited='__inited';
-  static const __router_setchild='__router_setchild';
+  static const __update='__update';
 }
 
 class __init
@@ -51,10 +51,32 @@ class __inited
   static const initResult='___initResult';
 }
 
-class __router_setchild
+class __update
 {
-  static const childKey='___childKey';
-  static const childPort='___childPort';
+  static const rules='___rules';
+  static const stats='___stats';
+  static const child='___child';
+}
+
+class ___rtrules
+{
+  static const msgPattern='____msgPattern';
+  static const sourceKey='____sourceKey';
+  static const ruleCondition='____ruleCondition';
+  static const ruleExecution='____ruleExecution';
+}
+
+class ___rtstats
+{
+  static const statKey='____statKey';
+  static const statValue='____statValue';
+  static const isUnset='____isUnset';
+}
+
+class ___rtchild
+{
+  static const childKey='____childKey';
+  static const ChildPort='____ChildPort';
 }
 
 void vm_main(Map<String,dynamic>initmsg)
