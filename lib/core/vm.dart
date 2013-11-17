@@ -14,6 +14,8 @@ class MSG
   static const _msgexception='_msgexception';
   static const _srckey='_srckey';
   static const _routekey='_routekey';
+  static const _srcmsgid='_srcmsgid';
+
 }
 
 class _msg
@@ -34,6 +36,10 @@ class __init
   static const className='___className';
   static const argumentList='___argumentList';
   static const classInstance='___classInstance';
+  static const sourceMsgID='___sourceMsgID';
+  static const procBegin='___procBegin';
+  static const procEnd='___procEnd';
+  static const elapsedTime='___elapsedTime';
 }
 
 class __error
@@ -129,7 +135,14 @@ void vm_main(Map<String,dynamic>initmsg)
             try
             {
               //invoke onMsg of vm class instance
+              var elapsed=new Stopwatch();
+              vm_context[__init.sourceMsgID]=msg[MSG._srcmsgid];
+              vm_context[__init.procBegin]=new DateTime.now();
+              elapsed.start();
               var result=classInstance.onMsg(msg);
+              elapsed.stop();
+              vm_context[__init.elapsedTime]=elapsed.elapsedMilliseconds;
+              vm_context[__init.procEnd]=new DateTime.now();
             }
             catch(e)
             {
@@ -241,6 +254,12 @@ abstract class VMbase implements VMinterface
   SendPort ownerPort;
   SendPort reportPort;
   Map<String,dynamic> funcMap;
+  Map<String,dynamic> vmContext;
+
+  VMbase()
+  {
+    funcMap={};
+  }
 
   void onInit(Map<String,dynamic> vm_context)
   {
@@ -248,7 +267,7 @@ abstract class VMbase implements VMinterface
     reportPort=vm_context[__init.reportPort];
     vmKey=vm_context[__init.vmKey];
 
-    funcMap={};
+    // funcMap={};
 
   }
   void onMsg(Map<String,dynamic> msg)
@@ -257,6 +276,7 @@ abstract class VMbase implements VMinterface
     if (func!=null)
       try
       {
+        vmContext=msg[MSG._vmcontext];
         return func(msg);
       }
       catch (e)
@@ -273,12 +293,14 @@ abstract class VMbase implements VMinterface
   void postMsg(Map<String,dynamic> msg)
   {
     if (reportPort!=null&&msg!=null)
-      reportPort.send(msg..[MSG._srckey]=vmKey);
+      reportPort.send(msg..[MSG._srckey]=vmKey
+                         ..[MSG._srcmsgid]=vmContext[__init.sourceMsgID]);
   }
   void returnMsg(Map<String,dynamic> msg)
   {
     if (ownerPort!=null)
-      ownerPort.send(msg..[MSG._srckey]=vmKey);
+      ownerPort.send(msg..[MSG._srckey]=vmKey
+                        ..[MSG._srcmsgid]=vmContext[__init.sourceMsgID]);
   }
 
   void registerMsg(String msgid,void msgHandler(Map<String,dynamic> msg))

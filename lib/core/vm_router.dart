@@ -27,6 +27,7 @@ class ECB
 class ECR
 {
   static const _sourcemsg='_sourcemsg';
+  static const _localstat='_localstat';
 }
 
 class NestObject
@@ -144,6 +145,7 @@ class execBroker extends Expando
     if (translateMap!=null)
     {
       targetMsg={MSG._msgid:sourceMsg[MSG._msgid]
+                ,MSG._srcmsgid:sourceMsg[MSG._srcmsgid]
                 ,MSG._srckey:sourceMsg[MSG._srckey]};
       translateMap.forEach((String sourceKey,String targetKey){
         var value=NestObject.GetNestObjectByString(sourceMsg, sourceKey);
@@ -166,7 +168,7 @@ class execResult extends Expando
 {
   Map<String,dynamic> updateStats(Map<String,dynamic> localStats)
   {
-
+    return this[ECR._localstat];
   }
 }
 
@@ -375,7 +377,8 @@ abstract class VMrouter implements VMinterface
   }
   dynamic parseExecution(String funcode)
   {
-
+    //send message
+    //change stats
   }
 
   void reportError(dynamic errmsg)
