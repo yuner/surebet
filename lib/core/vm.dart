@@ -85,6 +85,11 @@ class ___rtchild
   static const ChildPort='____ChildPort';
 }
 
+main(args, message)
+{
+  vm_main(message);
+}
+
 void vm_main(Map<String,dynamic>initmsg)
 {
   Map<String,dynamic> vm_context;
@@ -211,18 +216,23 @@ void reportError(dynamic errmsg,Map<String,dynamic> vm_context)
   throw new Exception(errmsg);
 }
 
-Future<Isolate> create_vm(String vmkey,Symbol libraryname,Symbol classname,List arguments,SendPort reportPort,SendPort ownerPort)
+Future<Isolate> create_vm(String vmkey,Symbol libraryname,Symbol classname,List classargs,SendPort reportPort,SendPort ownerPort
+                          ,[Uri uri,List<String> mainargs])
 {
   var initmsg={MSG._msgid:_msg.__init
               ,MSG._srckey:''
               ,MSG._routekey:''
               ,__init.libraryName:libraryname
               ,__init.className:classname
-              ,__init.argumentList:arguments
+              ,__init.argumentList:classargs
               ,__init.vmKey:vmkey
               ,__init.ownerPort:ownerPort
               ,__init.reportPort:reportPort};
-  var fur= Isolate.spawn(vm_main, initmsg);
+  Future<Isolate> fur;
+  if (uri==null)
+    fur= Isolate.spawn(vm_main, initmsg);
+  else
+    fur=Isolate.spawnUri(uri, mainargs, initmsg);
   return fur;
 }
 
