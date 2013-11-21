@@ -1,34 +1,46 @@
 
 part of yvm;
 
+// move to struct/router/routerule.dart
+/*
 class VMS
 {
-  static const _rtcondition='_rtcondition';
-  static const _rtexecution='_rtexecution';
-  static const _rtsourcekey='_rtsourcekey';
+  static const k_rtcondition='_rtcondition';
+  static const k_rtexecution='_rtexecution';
+  static const k_rtsourcekey='_rtsourcekey';
   static const owner='#owner#';
   static const report='#report#';
 }
+*/
 
+// move to struct/router/condbroker.dart
+/*
 class CDB
 {
-  static const _vminstanc='_vminstanc';
-  static const _sourcemsg='_sourcemsg';
-  static const _localstat='_localstat';
+  static const k_vminstanc='_vminstanc';
+  static const k_sourcemsg='_sourcemsg';
+  static const k_localstat='_localstat';
 }
+*/
 
+// move to struct/router/execbroker.dart
+/*
 class ECB
 {
-  static const _vminstanc='_vminstanc';
-  static const _sourcemsg='_sourcemsg';
-  static const _localstat='_localstat';
+  static const k_vminstanc='_vminstanc';
+  static const k_sourcemsg='_sourcemsg';
+  static const k_localstat='_localstat';
 }
+*/
 
+// move to struct/router/execresult.dart
+/*
 class ECR
 {
-  static const _sourcemsg='_sourcemsg';
-  static const _localstat='_localstat';
+  static const k_sourcemsg='_sourcemsg';
+  static const k_localstat='_localstat';
 }
+*/
 
 class NestObject
 {
@@ -107,13 +119,13 @@ class condBroker extends Expando
 {
   dynamic get_local_stat(String key)
   {
-    Map<String,dynamic> stat=this[CDB._localstat];
+    Map<String,dynamic> stat=this[CDB.k_localstat];
     return stat[key];
   }
 
   dynamic get_msg_value(String path)
   {
-    Map<String,dynamic> msg=this[CDB._sourcemsg];
+    Map<String,dynamic> msg=this[CDB.k_sourcemsg];
   }
 }
 
@@ -122,19 +134,19 @@ class execBroker extends Expando
 
   void set_local_stat(String key,dynamic value)
   {
-    Map<String,dynamic> stat=this[ECB._localstat];
+    Map<String,dynamic> stat=this[ECB.k_localstat];
     stat[key]=value;
   }
 
   dynamic get_local_stat(String key)
   {
-    Map<String,dynamic> stat=this[ECB._localstat];
+    Map<String,dynamic> stat=this[ECB.k_localstat];
     return stat[key];
   }
 
   dynamic unset_local_stat(String key)
   {
-    Map<String,dynamic> stat=this[ECB._localstat];
+    Map<String,dynamic> stat=this[ECB.k_localstat];
     return stat.remove(key);
   }
 
@@ -144,9 +156,9 @@ class execBroker extends Expando
     var targetMap=(translateMap==null?{}.addAll(sourceMsg):{});
     if (translateMap!=null)
     {
-      targetMsg={MSG._msgid:sourceMsg[MSG._msgid]
-                ,MSG._srcmsgid:sourceMsg[MSG._srcmsgid]
-                ,MSG._srckey:sourceMsg[MSG._srckey]};
+      targetMsg={MSG.k_msgid:sourceMsg[MSG.k_msgid]
+                ,MSG.k_srcmsgid:sourceMsg[MSG.k_srcmsgid]
+                ,MSG.k_srckey:sourceMsg[MSG.k_srckey]};
       translateMap.forEach((String sourceKey,String targetKey){
         var value=NestObject.GetNestObjectByString(sourceMsg, sourceKey);
         NestObject.SetNestObjectByString(targetMsg, targetKey, value);
@@ -157,7 +169,7 @@ class execBroker extends Expando
 
   void send_msg(String vmKey,Map<String,dynamic> targetMsg)
   {
-    VMrouter router=this[ECB._vminstanc];
+    VMrouter router=this[ECB.k_vminstanc];
     if (router!=null)
       router.sendMsg(vmKey,targetMsg);
   }
@@ -168,7 +180,7 @@ class execResult extends Expando
 {
   Map<String,dynamic> updateStats(Map<String,dynamic> localStats)
   {
-    return this[ECR._localstat];
+    return this[ECR.k_localstat];
   }
 }
 
@@ -183,9 +195,9 @@ abstract class VMrouter implements VMinterface
 
   void onInit(Map<String,dynamic> vm_context)
   {
-    ownerPort=vm_context[__init.ownerPort];
-    reportPort=vm_context[__init.reportPort];
-    vmKey=vm_context[__init.vmKey];
+    ownerPort=vm_context[MSG_INIT.ownerPort];
+    reportPort=vm_context[MSG_INIT.reportPort];
+    vmKey=vm_context[MSG_INIT.vmKey];
 
     listenerMap={};
     childrenMap={};
@@ -193,21 +205,21 @@ abstract class VMrouter implements VMinterface
 
   void onMsg(Map<String,dynamic> msg)
   {
-    String msgid=msg[MSG._msgid];
-    String srckey=msg[MSG._srckey];
+    String msgid=msg[MSG.k_msgid];
+    String srckey=msg[MSG.k_srckey];
     if (msgid==null) return;
     switch(msgid)
     {
-      case _msg.__update:
-        List<Map<String,dynamic>> stats=msg[__update.stats];
-        List<Map<String,dynamic>> rules=msg[__update.rules];
-        List<Map<String,dynamic>> child=msg[__update.child];
+      case INT_MSG.k__update:
+        List<Map<String,dynamic>> stats=msg[MSG_UPDATE.stats];
+        List<Map<String,dynamic>> rules=msg[MSG_UPDATE.rules];
+        List<Map<String,dynamic>> child=msg[MSG_UPDATE.child];
         if (stats!=null)
           for (var stat in stats)
           {
-            String key=stat[___rtstats.statKey];
-            dynamic value=stat[___rtstats.statValue];
-            bool unset=stat[___rtstats.isUnset];
+            String key=stat[M_UPDATE_STATS.statKey];
+            dynamic value=stat[M_UPDATE_STATS.statValue];
+            bool unset=stat[M_UPDATE_STATS.isUnset];
 
             if (unset)
               unsetLocalStat(key);
@@ -217,10 +229,10 @@ abstract class VMrouter implements VMinterface
         if (rules!=null)
           for (var rule in rules)
           {
-            String msgString=rule[___rtrules.msgPattern];
-            String sourceKey=rule[___rtrules.sourceKey];
-            String condition=rule[___rtrules.ruleCondition];
-            String execution=rule[___rtrules.ruleExecution];
+            String msgString=rule[M_UPDATE_RULES.msgPattern];
+            String sourceKey=rule[M_UPDATE_RULES.sourceKey];
+            String condition=rule[M_UPDATE_RULES.ruleCondition];
+            String execution=rule[M_UPDATE_RULES.ruleExecution];
             if (msgString!=null)
             {
               var msgPatterns=getMsgPattern(msgString);
@@ -239,8 +251,8 @@ abstract class VMrouter implements VMinterface
         if (child!=null)
           for (var chil in child)
           {
-            String key=chil[___rtchild.childKey];
-            SendPort port=chil[___rtchild.ChildPort];
+            String key=chil[M_UPDATE_CHILD.childKey];
+            SendPort port=chil[M_UPDATE_CHILD.ChildPort];
 
             if (port==null)
               unsetChildPort(key);
@@ -254,9 +266,9 @@ abstract class VMrouter implements VMinterface
           if (msgpattern.hasMatch(msgid))
           {
             var listener=listenerMap[msgpattern];
-            RegExp rtsourcekey=listener[VMS._rtsourcekey];
-            var rtcondition=listener[VMS._rtcondition];
-            var rtexecution=listener[VMS._rtexecution];
+            RegExp rtsourcekey=listener[VMS.k_rtsourcekey];
+            var rtcondition=listener[VMS.k_rtcondition];
+            var rtexecution=listener[VMS.k_rtexecution];
 
             if (rtsourcekey!=null)
               if (!rtsourcekey.hasMatch(srckey))
@@ -265,27 +277,27 @@ abstract class VMrouter implements VMinterface
             if (rtcondition!=null)
               try
               {
-                if (!rtcondition(new condBroker()..[CDB._vminstanc]=this
-                                                  ..[CDB._sourcemsg]=msg
-                                                  ..[CDB._localstat]={}.addAll(localStats)))
+                if (!rtcondition(new condBroker()..[CDB.k_vminstanc]=this
+                                                  ..[CDB.k_sourcemsg]=msg
+                                                  ..[CDB.k_localstat]={}.addAll(localStats)))
                   continue;
               }
               catch (e)
               {
-                this.reportError({MSG._msgid:_msg.__error
-                  ,MSG._srckey:vmKey
-                  ,MSG._msgexception:e
-                  ,__error.errKey:'vm_router:condition'
-                  ,__error.errString:'cannot eval message'
-                  ,__error.errObject:msg});
+                this.reportError({MSG.k_msgid:INT_MSG.k__error
+                  ,MSG.k_srckey:vmKey
+                  ,MSG.k_msgexception:e
+                  ,MSG_ERROR.errKey:'vm_router:condition'
+                  ,MSG_ERROR.errString:'cannot eval message'
+                  ,MSG_ERROR.errObject:msg});
               }
 
             if (rtexecution!=null)
               try
               {
-                execResult result=rtexecution(new execBroker()..[ECB._vminstanc]=this
-                                                        ..[ECB._sourcemsg]=msg
-                                                        ..[ECB._localstat]={}.addAll(localStats));
+                execResult result=rtexecution(new execBroker()..[ECB.k_vminstanc]=this
+                                                        ..[ECB.k_sourcemsg]=msg
+                                                        ..[ECB.k_localstat]={}.addAll(localStats));
                 if (result!=null)
                 {
                   localStats=result.updateStats(localStats);
@@ -294,12 +306,12 @@ abstract class VMrouter implements VMinterface
               }
               catch (e)
               {
-                this.reportError({MSG._msgid:_msg.__error
-                  ,MSG._srckey:vmKey
-                  ,MSG._msgexception:e
-                  ,__error.errKey:'vm_router:execution'
-                  ,__error.errString:'cannot exec message'
-                  ,__error.errObject:msg});
+                this.reportError({MSG.k_msgid:INT_MSG.k__error
+                  ,MSG.k_srckey:vmKey
+                  ,MSG.k_msgexception:e
+                  ,MSG_ERROR.errKey:'vm_router:execution'
+                  ,MSG_ERROR.errString:'cannot exec message'
+                  ,MSG_ERROR.errObject:msg});
             }
           }
         }
@@ -315,7 +327,7 @@ abstract class VMrouter implements VMinterface
     else port=childrenMap[vmKey];
     if (port!=null)
     {
-      port.send(msg..[MSG._routekey]=vmKey);
+      port.send(msg..[MSG.k_routekey]=vmKey);
     }
   }
 
@@ -327,9 +339,9 @@ abstract class VMrouter implements VMinterface
 
   void setRule(RegExp msgPattern,[String sourceKey,bool condition(condBroker),execResult execution(execBroker)])
   {
-    listenerMap[msgPattern]={VMS._rtsourcekey:sourceKey
-                            ,VMS._rtcondition:condition
-                            ,VMS._rtexecution:execution};
+    listenerMap[msgPattern]={VMS.k_rtsourcekey:sourceKey
+                            ,VMS.k_rtcondition:condition
+                            ,VMS.k_rtexecution:execution};
   }
   Map<String,dynamic> getRule(RegExp msgPattern)
   {

@@ -30,6 +30,17 @@ class loginResult
   static const succeed='succeed';
 }
 
+class statusUpdated
+{
+  static const waiting='waiting';
+  static const loginning='loginning';
+  static const focusing='focusing';
+  static const focused='focused';
+  static const retrieving='retrieving';
+
+}
+
+
 class sboWebclient extends VMbase
 {
   sboWebclient.SBOwebclient()

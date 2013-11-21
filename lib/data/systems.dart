@@ -1,6 +1,7 @@
 
 part of ysystem;
 
+//will be stored in db, class is no need anymore
 class GameTypes
 {
   static const Sports='Sports';

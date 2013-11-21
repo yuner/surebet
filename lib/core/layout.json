@@ -1,3 +1,13 @@
+//#<!--
+//#
+//#
+//#
+//#
+//#
+//#
+//#
+//#-->
+
 {
   'layout':{
     'router':"router",
@@ -9,19 +19,19 @@
     'rules':[
       {
         'pattern':"msgregex",
-        'sourcekey':"vm1",   //<!--equal matched-->
+        'sourcekey':"vm1",   //#<!--equal matched-->
         'condition':"scriptname1c",
         'action':"scriptname1x",
       }
       ,{
         'pattern':"msgregex",
-        'sourcekey':,        //<!--always matched-->
+        'sourcekey':,        //#<!--always matched-->
         'condition':"scriptname2c",
         'action':"scriptname3x",
       }
       ,{
         'pattern':"msgregex",
-        'sourcekey':"",      //<!--never matched-->
+        'sourcekey':"",      //#<!--never matched-->
         'condition':"scriptname3c",
         'action':"scriptname3x",
       }
@@ -53,13 +63,13 @@
         'rules':[
           {
             'pattern':"msgregex",
-            'sourcekey':"#owner#",//<!--from owner-->
+            'sourcekey':"#owner#", //#<!--from owner-->
             'condition':"scriptname21c",
             'action':"scriptname21x",
           }
           ,{
             'pattern':"msgregex",
-            'sourcekey':"#router#",//<!--from router-->
+            'sourcekey':"#router#", //#<!--from router-->
             'condition':"scriptname22c",
             'action':"scriptname22x",
           }
@@ -86,15 +96,16 @@
     ]
   },
   'scripts':{
-    'scriptname1c':"scriptcode(condBroker)=>bool",
-    'scriptname1x':"scriptcode(execBroker)=>execResult",
-    'scriptname2c':"scriptcode(condBroker)=>bool",
-    'scriptname2x':"scriptcode(execBroker)=>execResult",
-    'scriptname3c':"scriptcode(condBroker)=>bool",
-    'scriptname3x':"scriptcode(execBroker)=>execResult",
-    'scriptname21c':"scriptcode(condBroker)=>bool",
-    'scriptname21x':"scriptcode(execBroker)=>execResult",
-    'scriptname22c':"scriptcode(condBroker)=>bool",
-    'scriptname22x':"scriptcode(execBroker)=>execResult",
+    'scriptname1c':"""scriptcode(condBroker)=>bool""",
+    'scriptname1x':"""scriptcode(execBroker)=>execResult""",
+    'scriptname2c':"""scriptcode(condBroker)=>bool""",
+    'scriptname2x':"""scriptcode(execBroker)=>execResult""",
+    'scriptname3c':"""scriptcode(condBroker)=>bool""",
+    'scriptname3x':"""scriptcode(execBroker)=>execResult""",
+    'scriptname21c':"""scriptcode(condBroker)=>bool""",
+    'scriptname21x':"""scriptcode(execBroker)=>execResult""",
+    'scriptname22c':"""scriptcode(condBroker)=>bool""",
+    'scriptname22x':"""scriptcode(execBroker)=>execResult""",
   }
 }
+

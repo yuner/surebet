@@ -1,0 +1,13 @@
+ library init;
+   const vmKey='___vmKey';
+   const myPort='___myPort';
+   const reportPort='___reportPort';
+   const ownerPort='___ownerPort';
+   const libraryName='___libraryName';
+   const className='___className';
+   const argumentList='___argumentList';
+   const classInstance='___classInstance';
+   const sourceMsgID='___sourceMsgID';
+   const procBegin='___procBegin';
+   const procEnd='___procEnd';
+   const elapsedTime='___elapsedTime';

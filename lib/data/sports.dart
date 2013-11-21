@@ -50,6 +50,7 @@ class SportsAliasNames
   static const NamesList='NamesList';
 }
 
+//will be stored in db, class is no need anymore
 class SystemTypes
 {
   static const Sbo='Sbo';
