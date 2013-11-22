@@ -1,6 +1,7 @@
 
 part of ysystem;
 
+//move to struct classes/sports/*classname*.dart
 /*
 class SportsEvent
 {

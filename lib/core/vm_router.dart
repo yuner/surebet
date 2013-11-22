@@ -42,6 +42,8 @@ class ECR
 }
 */
 
+//move to func/nestobjecthelper
+/*
 class NestObject
 {
   static GetNestObjectByString(dynamic obj,String path)
@@ -114,8 +116,18 @@ class NestObject
       var refval=refobj.setField(new Symbol(key), value);
   }
 }
+*/
 
-class condBroker extends Expando
+
+
+class ExpandoMe<Tkey, Tval>
+{
+  Map<Tkey,Tval> _localMap={};
+  Tval operator[](Tkey key)=>_localMap[key];
+  void operator[]=(Tkey key,Tval val){_localMap[key]=val;}
+}
+
+class condBroker extends ExpandoMe
 {
   dynamic get_local_stat(String key)
   {
@@ -129,7 +141,7 @@ class condBroker extends Expando
   }
 }
 
-class execBroker extends Expando
+class execBroker extends ExpandoMe
 {
 
   void set_local_stat(String key,dynamic value)
@@ -176,7 +188,7 @@ class execBroker extends Expando
 
 }
 
-class execResult extends Expando
+class execResult extends ExpandoMe
 {
   Map<String,dynamic> updateStats(Map<String,dynamic> localStats)
   {
