@@ -1,6 +1,7 @@
 
 part of ysystem;
 
+/*
 class SportsEvent
 {
   static const SportsEventID='SportsEventID';
@@ -49,8 +50,11 @@ class SportsAliasNames
   static const SystemType='SystemType';
   static const NamesList='NamesList';
 }
+*/
 
+//move to struct/types/systemtype.dart
 //will be stored in db, class is no need anymore
+/*
 class SystemTypes
 {
   static const Sbo='Sbo';
@@ -58,8 +62,11 @@ class SystemTypes
   static const Pinnacle='Pinnacle';
   static const Crown='Crown';
 }
+*/
 
+// move to struct/types/sports/markettype.dart
 //will be stored in db, class is no need anymore
+/*
 class MarketTypes
 {
   static const Asian_Handicap='Asian_Handicap';
@@ -81,8 +88,11 @@ class MarketTypes
   static const First_Half_Asian_1X2='First_Half_Asian_1X2';
   static const Specials='Specials';
 }
+*/
 
+// move to struct/types/sports/sportstype.dart
 //will be stored in db, class is no need anymore
+/*
 class SportTypes
 {
   static const Football='Football';
@@ -116,3 +126,4 @@ class SportTypes
   static const WaterPolo='WaterPolo';
   static const WinterSports='WinterSports';
 }
+*/

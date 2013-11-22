@@ -2,6 +2,8 @@
 
 part of sbo;
 
+// move to web_client_messages.dart
+/*
 class SBO
 {
   static const login='login';
@@ -18,18 +20,27 @@ class SBO
   static const betResult='betResult';
   static const getoddsResult='getoddsResult';
 }
+*/
 
+// move to struct/message/webclient/login.dart
+/*
 class login
 {
   static const userName='userName';
   static const passWord='passWord';
 }
+*/
 
+// move to struct/message/webclient/loginresult.dart
+/*
 class loginResult
 {
   static const succeed='succeed';
 }
+*/
 
+// move to struct/types/webclient/statusupdated.dart
+/*
 class statusUpdated
 {
   static const waiting='waiting';
@@ -39,7 +50,7 @@ class statusUpdated
   static const retrieving='retrieving';
 
 }
-
+*/
 
 class sboWebclient extends VMbase
 {
