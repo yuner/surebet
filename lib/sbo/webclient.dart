@@ -54,19 +54,31 @@ class statusUpdated
 
 class sboWebclient extends VMbase
 {
-  sboWebclient.SBOwebclient()
+
+  T_Status.statusType statusNow;
+
+  sboWebclient()
   {
+
     registerMsg(SBO.login, login);
     registerMsg(SBO.getodds, getodds);
     registerMsg(SBO.keepalive, keepalive);
     registerMsg(SBO.focus, focus);
     registerMsg(SBO.bet, bet);
     registerMsg(SBO.getodds, getodds);
+
+    statusNow=T_Status.statusType.instance(T_Status.waiting);
   }
 
   void login(Map<String,dynamic> msg)
   {
+    var user=msg[M_Login.userName];
+    var pass=msg[M_Login.passWord];
 
+
+    var newmsg={MSG.k_msgid:SBO.loginResult
+                ,M_LoginResult.succeedType:''};
+    postMsg(newmsg);
   }
 
   void logout(Map<String,dynamic> msg)

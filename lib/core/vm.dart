@@ -1,7 +1,7 @@
 
 library yvm;
 
-import "dart:mirrors";
+//import "dart:mirrors";
 import "dart:isolate";
 import "dart:async";
 
