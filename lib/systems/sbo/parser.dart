@@ -1,7 +1,7 @@
 
 part of sbo;
 
-class sboWebparser extends VMbase
+class sboWebparser extends WebParserBase
 {
 
   sboWebparser()

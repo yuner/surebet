@@ -33,75 +33,75 @@ library SportTypes;
 
  class SportTypes
  {
-   static const kFootball=const SportTypes._(Football);
-   static const kBasketball=const SportTypes._(Basketball);
-   static const kBaseball=const SportTypes._(Baseball);
-   static const kTennis=const SportTypes._(Tennis);
-   static const kAmericanFootball=const SportTypes._(AmericanFootball);
-   static const kAthletics=const SportTypes._(Athletics);
-   static const kBadminton=const SportTypes._(Badminton);
-   static const kBeachSoccer=const SportTypes._(BeachSoccer);
-   static const kBoxing=const SportTypes._(Boxing);
-   static const kCricket=const SportTypes._(Cricket);
-   static const kCycling=const SportTypes._(Cycling);
-   static const kDarts=const SportTypes._(Darts);
-   static const kEntertainment=const SportTypes._(Entertainment);
-   static const kFieldHockey=const SportTypes._(FieldHockey);
-   static const kFinancial=const SportTypes._(Financial);
-   static const kFutsal=const SportTypes._(Futsal);
-   static const kGolf=const SportTypes._(Golf);
-   static const kHandball=const SportTypes._(Handball);
-   static const kIceHockey=const SportTypes._(IceHockey);
-   static const kLacrosse=const SportTypes._(Lacrosse);
-   static const kMixedMartialArts=const SportTypes._(MixedMartialArts);
-   static const kMotorSport=const SportTypes._(MotorSport);
-   static const kOlympic=const SportTypes._(Olympic);
-   static const kPool_Snooker=const SportTypes._(Pool_Snooker);
-   static const kRugby=const SportTypes._(Rugby);
-   static const kSquash=const SportTypes._(Squash);
-   static const kTableTennis=const SportTypes._(TableTennis);
-   static const kVolleyball=const SportTypes._(Volleyball);
-   static const kWaterPolo=const SportTypes._(WaterPolo);
-   static const kWinterSports=const SportTypes._(WinterSports);
+   static const _Football=const SportTypes._(Football);
+   static const _Basketball=const SportTypes._(Basketball);
+   static const _Baseball=const SportTypes._(Baseball);
+   static const _Tennis=const SportTypes._(Tennis);
+   static const _AmericanFootball=const SportTypes._(AmericanFootball);
+   static const _Athletics=const SportTypes._(Athletics);
+   static const _Badminton=const SportTypes._(Badminton);
+   static const _BeachSoccer=const SportTypes._(BeachSoccer);
+   static const _Boxing=const SportTypes._(Boxing);
+   static const _Cricket=const SportTypes._(Cricket);
+   static const _Cycling=const SportTypes._(Cycling);
+   static const _Darts=const SportTypes._(Darts);
+   static const _Entertainment=const SportTypes._(Entertainment);
+   static const _FieldHockey=const SportTypes._(FieldHockey);
+   static const _Financial=const SportTypes._(Financial);
+   static const _Futsal=const SportTypes._(Futsal);
+   static const _Golf=const SportTypes._(Golf);
+   static const _Handball=const SportTypes._(Handball);
+   static const _IceHockey=const SportTypes._(IceHockey);
+   static const _Lacrosse=const SportTypes._(Lacrosse);
+   static const _MixedMartialArts=const SportTypes._(MixedMartialArts);
+   static const _MotorSport=const SportTypes._(MotorSport);
+   static const _Olympic=const SportTypes._(Olympic);
+   static const _Pool_Snooker=const SportTypes._(Pool_Snooker);
+   static const _Rugby=const SportTypes._(Rugby);
+   static const _Squash=const SportTypes._(Squash);
+   static const _TableTennis=const SportTypes._(TableTennis);
+   static const _Volleyball=const SportTypes._(Volleyball);
+   static const _WaterPolo=const SportTypes._(WaterPolo);
+   static const _WinterSports=const SportTypes._(WinterSports);
 
    static final Map _keylist={
-                              Football:kFootball,
-                              Basketball:kBasketball,
-                              Baseball:kBaseball,
-                              Tennis:kTennis,
-                              AmericanFootball:kAmericanFootball,
-                              Athletics:kAthletics,
-                              Badminton:kBadminton,
-                              BeachSoccer:kBeachSoccer,
-                              Boxing:kBoxing,
-                              Cricket:kCricket,
-                              Cycling:kCycling,
-                              Darts:kDarts,
-                              Entertainment:kEntertainment,
-                              FieldHockey:kFieldHockey,
-                              Financial:kFinancial,
-                              Futsal:kFutsal,
-                              Golf:kGolf,
-                              Handball:kHandball,
-                              IceHockey:kIceHockey,
-                              Lacrosse:kLacrosse,
-                              MixedMartialArts:kMixedMartialArts,
-                              MotorSport:kMotorSport,
-                              Olympic:kOlympic,
-                              Pool_Snooker:kPool_Snooker,
-                              Rugby:kRugby,
-                              Squash:kSquash,
-                              TableTennis:kTableTennis,
-                              Volleyball:kVolleyball,
-                              WaterPolo:kWaterPolo,
-                              WinterSports:kWinterSports
+                              Football:_Football,
+                              Basketball:_Basketball,
+                              Baseball:_Baseball,
+                              Tennis:_Tennis,
+                              AmericanFootball:_AmericanFootball,
+                              Athletics:_Athletics,
+                              Badminton:_Badminton,
+                              BeachSoccer:_BeachSoccer,
+                              Boxing:_Boxing,
+                              Cricket:_Cricket,
+                              Cycling:_Cycling,
+                              Darts:_Darts,
+                              Entertainment:_Entertainment,
+                              FieldHockey:_FieldHockey,
+                              Financial:_Financial,
+                              Futsal:_Futsal,
+                              Golf:_Golf,
+                              Handball:_Handball,
+                              IceHockey:_IceHockey,
+                              Lacrosse:_Lacrosse,
+                              MixedMartialArts:_MixedMartialArts,
+                              MotorSport:_MotorSport,
+                              Olympic:_Olympic,
+                              Pool_Snooker:_Pool_Snooker,
+                              Rugby:_Rugby,
+                              Squash:_Squash,
+                              TableTennis:_TableTennis,
+                              Volleyball:_Volleyball,
+                              WaterPolo:_WaterPolo,
+                              WinterSports:_WinterSports
    };
 
 
    final String _key;
-   String get key=>_key;
+   String get typeid=>_key;
 
-   static instance(String key)=>_keylist[key];
+   static types(String key)=>_keylist[key];
 
    const SportTypes._(this._key);
 

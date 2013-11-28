@@ -7,22 +7,22 @@ library SystemTypes;
 
  class SystemTypes
  {
-   static const kSbo=const SystemTypes._(Sbo);
-   static const kIbc=const SystemTypes._(Ibc);
-   static const kPinnacle=const SystemTypes._(Pinnacle);
-   static const kCrown=const SystemTypes._(Crown);
+   static const _Sbo=const SystemTypes._(Sbo);
+   static const _Ibc=const SystemTypes._(Ibc);
+   static const _Pinnacle=const SystemTypes._(Pinnacle);
+   static const _Crown=const SystemTypes._(Crown);
 
    static final Map _keylist={
-                              Sbo:kSbo,
-                              Ibc:kIbc,
-                              Pinnacle:kPinnacle,
-                              Crown:kCrown
+                              Sbo:_Sbo,
+                              Ibc:_Ibc,
+                              Pinnacle:_Pinnacle,
+                              Crown:_Crown
    };
 
    final String _key;
-   String get key=>_key;
+   String get typeid=>_key;
 
-   static instance(String key)=>_keylist[key];
+   static types(String key)=>_keylist[key];
 
    const SystemTypes._(this._key);
 

@@ -1,7 +1,7 @@
 
 part of sbo;
 
-class sboController extends VMbase
+class sboController extends ControllerBase
 {
   sboController()
   {

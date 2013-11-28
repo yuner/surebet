@@ -8,26 +8,26 @@ library GameTypes;
 
  class GameTypes
  {
-   static const kSports=const GameTypes._(Sports);
-   static const kCasinos=const GameTypes._(Casinos);
-   static const kLiveCasinos=const GameTypes._(LiveCasinos);
-   static const kPokers=const GameTypes._(Pokers);
-   static const kGames=const GameTypes._(Games);
-   static const kRaces=const GameTypes._(Races);
+   static const _Sports=const GameTypes._(Sports);
+   static const _Casinos=const GameTypes._(Casinos);
+   static const _LiveCasinos=const GameTypes._(LiveCasinos);
+   static const _Pokers=const GameTypes._(Pokers);
+   static const _Games=const GameTypes._(Games);
+   static const _Races=const GameTypes._(Races);
 
    static final Map _keylist={
-                              Sports:kSports,
-                              Casinos:kCasinos,
-                              LiveCasinos:kLiveCasinos,
-                              Pokers:kPokers,
-                              Games:kGames,
-                              Races:kRaces
+                              Sports:_Sports,
+                              Casinos:_Casinos,
+                              LiveCasinos:_LiveCasinos,
+                              Pokers:_Pokers,
+                              Games:_Games,
+                              Races:_Races
    };
 
    final String _key;
-   String get key=>_key;
+   String get typeid=>_key;
 
-   static instance(String key)=>_keylist[key];
+   static types(String key)=>_keylist[key];
 
    const GameTypes._(this._key);
 

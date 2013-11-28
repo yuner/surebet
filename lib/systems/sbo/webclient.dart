@@ -52,22 +52,21 @@ class statusUpdated
 }
 */
 
-class sboWebclient extends VMbase
+class sboWebclient extends WebclientBase
 {
-
-  T_Status.statusType statusNow;
 
   sboWebclient()
   {
 
-    registerMsg(SBO.login, login);
-    registerMsg(SBO.getodds, getodds);
-    registerMsg(SBO.keepalive, keepalive);
-    registerMsg(SBO.focus, focus);
-    registerMsg(SBO.bet, bet);
-    registerMsg(SBO.getodds, getodds);
+    registerMsg(W_MSG.login, login);
+    registerMsg(W_MSG.getodds, getodds);
+    registerMsg(W_MSG.keepalive, keepalive);
+    registerMsg(W_MSG.focus, focus);
+    registerMsg(W_MSG.bet, bet);
+    registerMsg(W_MSG.getodds, getodds);
 
-    statusNow=T_Status.statusType.instance(T_Status.waiting);
+    statusNow=T_Status.statusType.types(T_Status.waiting);
+
   }
 
   void login(Map<String,dynamic> msg)
@@ -76,8 +75,8 @@ class sboWebclient extends VMbase
     var pass=msg[M_Login.passWord];
 
 
-    var newmsg={MSG.k_msgid:SBO.loginResult
-                ,M_LoginResult.succeedType:''};
+    var newmsg={MSG.k_msgid:W_MSG.loginResult
+                ,M_LoginResult.succeedType:T_Succeed.loginOK};
     postMsg(newmsg);
   }
 
