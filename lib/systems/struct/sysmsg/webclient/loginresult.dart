@@ -1,3 +1,3 @@
 
 library loginResult;
-  const succeedType='succeedType';
+  const succeedType='succeedType';  //String:IDkey:[succeedType]

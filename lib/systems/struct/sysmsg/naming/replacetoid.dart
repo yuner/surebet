@@ -1,4 +1,4 @@
 library replaceToID;
 
-const eventList='eventList';
+const eventList='eventList';  //Map<String:IDkey,Map[sportsevent]>
 

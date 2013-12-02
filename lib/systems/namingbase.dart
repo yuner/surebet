@@ -9,15 +9,15 @@ abstract class NameWrapperBase extends VMbase
   Map<String,String> _TeamCache={};
 
 
-  void replaceToID(Map<String,Map<String,dynamic>> msg)
+  Map<String,Map<String,dynamic>> _replaceToID(Map<String,Map<String,dynamic>> eventCollection)
   {
-    Map<String,Map<String,dynamic>> eventCollection=msg[M_ReplaceToID.eventList];
+    if (eventCollection==null) return eventCollection;
 
     eventCollection.keys.forEach((key){
       var evt=eventCollection[key];
-      String league=evt[SE.LeagueID];
-      String hostTeam=evt[SE.HostTeamID];
-      String guestTeam=evt[SE.GuestTeamID];
+      String league=evt[SE.LeagueName];
+      String hostTeam=evt[SE.HostTeamName];
+      String guestTeam=evt[SE.GuestTeamName];
 
       var uleague=league.toUpperCase();
       var uhostTeam=hostTeam.toUpperCase();
@@ -114,6 +114,72 @@ abstract class NameWrapperBase extends VMbase
 
     });
 
-    postMsg(msg);
   }
+
+
+  void replaceToID(Map<String,dynamic> msg)
+  {
+    Map<String,Map<String,dynamic>> eventCollection=msg[M_ReplaceToID.eventList];
+
+    var ec=_replaceToID(eventCollection);
+
+    if (ec!=null) postMsg({MSG.k_msgid:N_MSG.replaceToID
+                          ,M_IDReplaced.eventList:ec});
+  }
+
+  void updateNames(Map<String,dynamic> msg)
+  {
+    Map<String,Map<String,dynamic>> leagueCollection=msg[M_updateNames.leagueNames];
+    Map<String,Map<String,dynamic>> teamCollection=msg[M_ReplaceToID.eventList];
+
+    var upl=_updateLeagueNames(leagueCollection);
+    var upt=_updateTeamNames(teamCollection);
+    if (upl!=null) postMsg({MSG.k_msgid:N_MSG.leagueNamesUpdated,
+                   M_leagueUpdated.leagueNames:upl});
+    if (upt!=null) postMsg({MSG.k_msgid:N_MSG.teamNamesUpdated,
+      M_teamUpdated.TeamNames:upt});
+  }
+
+  Map<String,Map<String,dynamic>> _updateLeagueNames(Map<String,Map<String,dynamic>> leagueCollection)
+  {
+    if (leagueCollection==null) return leagueCollection;
+    var oldmap={};
+    for (var key in leagueCollection)
+    {
+      var league=leagueCollection[key];
+      var lt=_LeagueMap.remove(key);
+      oldmap[key]=(lt==null)?lt:lt.toMap();
+      if (league!=null)
+      {
+        _LeagueMap[key]..SportsLeagueID=league[SL.k_SportsLeagueID]
+                       ..LeagueDisplayName=league[SL.k_LeagueDisplayName]
+                       ..LeagueAliasNames=league[SL.k_LeagueAliasNames]
+                       ..NameFilterRegExp=new RegExp(league[SL.k_NameFilterRegExp]);
+      }
+    }
+    return oldmap;
+  }
+
+  Map<String,Map<String,dynamic>> _updateTeamNames(Map<String,Map<String,dynamic>> teamCollection)
+  {
+    if (teamCollection==null) return teamCollection;
+    var oldmap={};
+    for (var key in teamCollection)
+    {
+      var team=teamCollection[key];
+      var tt=_TeamMap.remove(key);
+      oldmap[key]=(tt==null)?tt:tt.toMap();
+      if (team!=null)
+      {
+        _TeamMap[key]..SportsTeamID=team[ST.k_SportsTeamID]
+                     ..TeamDisplayName=team[ST.k_TeamDisplayName]
+                     ..TeamAliasNames=team[ST.k_TeamAliasNames]
+                     ..NameFilterRegExp=new RegExp(team[ST.k_NameFilterRegExp]);
+      }
+    }
+    return oldmap;
+  }
+
+
+
 }

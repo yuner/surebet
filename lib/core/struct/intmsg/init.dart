@@ -1,13 +1,13 @@
  library init;
-   const vmKey='___vmKey';
-   const myPort='___myPort';
-   const reportPort='___reportPort';
-   const ownerPort='___ownerPort';
-   const libraryName='___libraryName';
-   const className='___className';
-   const argumentList='___argumentList';
-   const classInstance='___classInstance';
-   const sourceMsgID='___sourceMsgID';
-   const procBegin='___procBegin';
-   const procEnd='___procEnd';
-   const elapsedTime='___elapsedTime';
+   const vmKey='___vmKey';                  //String:IDkey
+   const myPort='___myPort';                //SendPort
+   const reportPort='___reportPort';        //SendPort
+   const ownerPort='___ownerPort';          //SendPort
+   const libraryName='___libraryName';      //String:Symbol
+   const className='___className';          //String:Symbol
+   const argumentList='___argumentList';    //List<String:dynamic>
+   const classInstance='___classInstance';  //Object
+   const sourceMsgID='___sourceMsgID';      //String:IDkey
+   const procBegin='___procBegin';          //DateTime;
+   const procEnd='___procEnd';              //DateTime;
+   const elapsedTime='___elapsedTime';      //int

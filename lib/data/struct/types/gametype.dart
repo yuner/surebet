@@ -1,4 +1,7 @@
 library GameTypes;
+
+import '../../base.dart';
+
  const Sports='Sports';
  const Casinos='Casinos';
  const LiveCasinos='LiveCasinos';
@@ -15,7 +18,7 @@ library GameTypes;
    static const _Games=const GameTypes._(Games);
    static const _Races=const GameTypes._(Races);
 
-   static final Map _keylist={
+   static final Map<IDkey,GameTypes> _keylist={
                               Sports:_Sports,
                               Casinos:_Casinos,
                               LiveCasinos:_LiveCasinos,
@@ -24,10 +27,10 @@ library GameTypes;
                               Races:_Races
    };
 
-   final String _key;
-   String get typeid=>_key;
+   final IDkey _key;
+   IDkey get typeid=>_key;
 
-   static types(String key)=>_keylist[key];
+   static types(IDkey key)=>_keylist[key];
 
    const GameTypes._(this._key);
 

@@ -1,5 +1,5 @@
 
-part of ysystem;
+part of ydata;
 
 // move to struct/types/system.dart
 //will be stored in db, class is no need anymore

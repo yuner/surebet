@@ -1,5 +1,7 @@
 library SportsMarket;
 
+import '../../../base.dart';
+
 import 'sportswager.dart';
 import '../../types/sports/markettype.dart' as MT;
 
@@ -10,9 +12,9 @@ const WagerCollection='WagerCollection';
 
 class SportsMarket
 {
-  String SportsMarketID;
-  String SportsEventID;
+  IDkey SportsMarketID;
+  IDkey SportsEventID;
   MT.MarketTypes MarketType;
-  Map<String,List<SportsWager>> WagerCollection;
+  Map<IDkey,List<SportsWager>> WagerCollection;
 }
 

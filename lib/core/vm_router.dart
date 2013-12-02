@@ -119,15 +119,19 @@ class NestObject
 */
 
 
-
+// move to struct/router/routerule.dart
+/*
 class ExpandoMe<Tkey, Tval>
 {
   Map<Tkey,Tval> _localMap={};
   Tval operator[](Tkey key)=>_localMap[key];
   void operator[]=(Tkey key,Tval val){_localMap[key]=val;}
 }
+*/
 
-class condBroker extends ExpandoMe
+// move to struct/router/condbroker.dart
+/*
+class condBroker extends Object with ExpandoMe
 {
   dynamic get_local_stat(String key)
   {
@@ -140,8 +144,11 @@ class condBroker extends ExpandoMe
     Map<String,dynamic> msg=this[CDB.k_sourcemsg];
   }
 }
+*/
 
-class execBroker extends ExpandoMe
+// move to struct/router/execbroker.dart
+/*
+class execBroker extends Object with ExpandoMe
 {
 
   void set_local_stat(String key,dynamic value)
@@ -187,14 +194,18 @@ class execBroker extends ExpandoMe
   }
 
 }
+*/
 
-class execResult extends ExpandoMe
+// move to struct/router/execresult.dart
+/*
+class execResult extends Object with ExpandoMe
 {
   Map<String,dynamic> updateStats(Map<String,dynamic> localStats)
   {
     return this[ECR.k_localstat];
   }
 }
+*/
 
 abstract class VMrouter implements VMinterface
 {
@@ -289,7 +300,7 @@ abstract class VMrouter implements VMinterface
             if (rtcondition!=null)
               try
               {
-                if (!rtcondition(new condBroker()..[CDB.k_vminstanc]=this
+                if (!rtcondition(new CDB.condBroker()..[CDB.k_vminstanc]=this
                                                   ..[CDB.k_sourcemsg]=msg
                                                   ..[CDB.k_localstat]={}.addAll(localStats)))
                   continue;
@@ -307,7 +318,7 @@ abstract class VMrouter implements VMinterface
             if (rtexecution!=null)
               try
               {
-                execResult result=rtexecution(new execBroker()..[ECB.k_vminstanc]=this
+                ECR.execResult result=rtexecution(new ECB.execBroker()..[ECB.k_vminstanc]=this
                                                         ..[ECB.k_sourcemsg]=msg
                                                         ..[ECB.k_localstat]={}.addAll(localStats));
                 if (result!=null)
@@ -349,7 +360,7 @@ abstract class VMrouter implements VMinterface
     listenerMap.keys.where((RegExp msgPattern)=>msgPattern==msgString);
   }
 
-  void setRule(RegExp msgPattern,[String sourceKey,bool condition(condBroker),execResult execution(execBroker)])
+  void setRule(RegExp msgPattern,[String sourceKey,bool condition(condBroker),ECR.execResult execution(execBroker)])
   {
     listenerMap[msgPattern]={VMS.k_rtsourcekey:sourceKey
                             ,VMS.k_rtcondition:condition
@@ -397,7 +408,17 @@ abstract class VMrouter implements VMinterface
 
   dynamic parseCondition(String funcode)
   {
+    /*
+    -------------------------------------------------------------------------
+    typedef int function(String arg1,int arg2); //as a delegate, supported now
 
+    closuremirror=reflect(function);           //reflect it, need a little modify
+    closuremirror.loadsource(uri);             //load realcode from web, filer, etc.
+    -or-
+    closuremirror.loadsource("int (String localarg1,int localarg2){ return int.parse(localarg1)+localarg2; }");        //load realcode from string
+    //add it in mirror system
+    var result=closuremirror.apply(arg1, arg2); //run it
+    */
   }
   dynamic parseExecution(String funcode)
   {

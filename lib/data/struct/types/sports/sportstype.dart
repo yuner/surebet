@@ -1,5 +1,7 @@
 library SportTypes;
 
+import '../../../base.dart';
+
  const Football='Football';
  const Basketball='Basketball';
  const Baseball='Baseball';
@@ -64,7 +66,7 @@ library SportTypes;
    static const _WaterPolo=const SportTypes._(WaterPolo);
    static const _WinterSports=const SportTypes._(WinterSports);
 
-   static final Map _keylist={
+   static final Map<IDkey,SportTypes> _keylist={
                               Football:_Football,
                               Basketball:_Basketball,
                               Baseball:_Baseball,
@@ -98,10 +100,10 @@ library SportTypes;
    };
 
 
-   final String _key;
-   String get typeid=>_key;
+   final IDkey _key;
+   IDkey get typeid=>_key;
 
-   static types(String key)=>_keylist[key];
+   static types(IDkey key)=>_keylist[key];
 
    const SportTypes._(this._key);
 

@@ -1,4 +1,4 @@
 library child;
 
- const childKey='____childKey';
- const ChildPort='____ChildPort';
+ const childKey='____childKey';   //String:IDkey
+ const ChildPort='____ChildPort'; //SendPort

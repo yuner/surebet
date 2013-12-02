@@ -1,4 +1,4 @@
 library stats;
- const statKey='____statKey';
- const statValue='____statValue';
- const isUnset='____isUnset';
+ const statKey='____statKey';     //String:IDkey
+ const statValue='____statValue'; //String
+ const isUnset='____isUnset';     //Bool

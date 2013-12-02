@@ -1,4 +1,7 @@
 library SportsWager;
+
+import '../../../base.dart';
+
 const SportsWagerID='SportsWagerID';
 const SportsMarketID='SportsMarketID';
 const WagerGroupKey='WagerGroupKey';
@@ -7,9 +10,9 @@ const Odds='Odds';
 
 class SportsWager
 {
-  String SportsWagerID;
-  String SportsMarketID;
-  String WagerGroupKey;
-  String WagerTypeKey;
+  IDkey SportsWagerID;
+  IDkey SportsMarketID;
+  IDkey WagerGroupKey;
+  IDkey WagerTypeKey;
   num Odds;
 }

@@ -1,5 +1,5 @@
 
-part of ysystem;
+part of ydata;
 
 //move to struct classes/sports/*classname*.dart
 /*

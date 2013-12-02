@@ -1,5 +1,7 @@
 library MarketTypes;
 
+import '../../../base.dart';
+
  const Asian_Handicap='Asian_Handicap';
  const Odd_Even='Odd_Even';
  const Over_Under='Over_Under';
@@ -40,7 +42,7 @@ library MarketTypes;
    static const _First_Half_Asian_1X2=const MarketTypes._(First_Half_Asian_1X2);
    static const _Specials=const MarketTypes._(Specials);
 
-   static final Map _keylist={
+   static final Map<IDkey,MarketTypes> _keylist={
                        Asian_Handicap:_Asian_Handicap,
                        Odd_Even:_Odd_Even,
                        Over_Under:_Over_Under,
@@ -61,10 +63,10 @@ library MarketTypes;
                        Specials:_Specials
                        };
 
-   final String _key;
-   String get typeid=>_key;
+   final IDkey _key;
+   IDkey get typeid=>_key;
 
-   static types(String key)=>_keylist[key];
+   static types(IDkey key)=>_keylist[key];
 
    const MarketTypes._(this._key);
 

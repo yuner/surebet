@@ -1,5 +1,7 @@
 library SystemTypes;
 
+import '../../base.dart';
+
  const Sbo='Sbo';
  const Ibc='Ibc';
  const Pinnacle='Pinnacle';
@@ -12,17 +14,17 @@ library SystemTypes;
    static const _Pinnacle=const SystemTypes._(Pinnacle);
    static const _Crown=const SystemTypes._(Crown);
 
-   static final Map _keylist={
+   static final Map<IDkey,SystemTypes> _keylist={
                               Sbo:_Sbo,
                               Ibc:_Ibc,
                               Pinnacle:_Pinnacle,
                               Crown:_Crown
    };
 
-   final String _key;
-   String get typeid=>_key;
+   final IDkey _key;
+   IDkey get typeid=>_key;
 
-   static types(String key)=>_keylist[key];
+   static types(IDkey key)=>_keylist[key];
 
    const SystemTypes._(this._key);
 

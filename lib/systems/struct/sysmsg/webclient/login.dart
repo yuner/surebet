@@ -1,3 +1,4 @@
 library login;
- const userName='userName';
- const passWord='passWord';
+
+ const userName='userName';     //String
+ const passWord='passWord';     //String
