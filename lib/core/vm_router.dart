@@ -212,7 +212,7 @@ abstract class VMrouter implements VMinterface
   String vmKey;
   SendPort ownerPort;
   SendPort reportPort;
-  Map<RegExp,Map<String,dynamic>> listenerMap;
+  Map<RegExp,VMS.routerulePack> listenerMap;
   Map<String,SendPort> childrenMap;
   Map<String,dynamic> localStats;
 
@@ -289,9 +289,9 @@ abstract class VMrouter implements VMinterface
           if (msgpattern.hasMatch(msgid))
           {
             var listener=listenerMap[msgpattern];
-            RegExp rtsourcekey=listener[VMS.k_rtsourcekey];
-            var rtcondition=listener[VMS.k_rtcondition];
-            var rtexecution=listener[VMS.k_rtexecution];
+            RegExp rtsourcekey=listener.rtsourcekey;
+            var rtcondition=listener.rtcondition;
+            var rtexecution=listener.rtcondition;
 
             if (rtsourcekey!=null)
               if (!rtsourcekey.hasMatch(srckey))
@@ -319,8 +319,8 @@ abstract class VMrouter implements VMinterface
               try
               {
                 ECR.execResult result=rtexecution(new ECB.execBroker()..[ECB.k_vminstanc]=this
-                                                        ..[ECB.k_sourcemsg]=msg
-                                                        ..[ECB.k_localstat]={}.addAll(localStats));
+                                                                      ..[ECB.k_sourcemsg]=msg
+                                                                      ..[ECB.k_localstat]={}.addAll(localStats));
                 if (result!=null)
                 {
                   localStats=result.updateStats(localStats);
@@ -362,18 +362,20 @@ abstract class VMrouter implements VMinterface
 
   void setRule(RegExp msgPattern,[String sourceKey,bool condition(condBroker),ECR.execResult execution(execBroker)])
   {
-    listenerMap[msgPattern]={VMS.k_rtsourcekey:sourceKey
-                            ,VMS.k_rtcondition:condition
-                            ,VMS.k_rtexecution:execution};
+    listenerMap[msgPattern]..rtsourcekey=new RegExp(sourceKey)
+                           ..rtcondition=condition
+                           ..rtexecution=execution;
   }
   Map<String,dynamic> getRule(RegExp msgPattern)
   {
-    return listenerMap[msgPattern];
+    var rule= listenerMap[msgPattern];
+    return (rule==null)?rule:rule.toMap();
   }
 
   Map<String,dynamic> unsetRule(RegExp msgPattern)
   {
-    return listenerMap[msgPattern];
+    var rule= listenerMap.remove(msgPattern);
+    return (rule==null)?rule:rule.toMap();
   }
 
   void setChildPort(String vmKey,SendPort port)

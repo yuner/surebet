@@ -9,7 +9,7 @@ abstract class NameWrapperBase extends VMbase
   Map<String,String> _TeamCache={};
 
 
-  Map<String,Map<String,dynamic>> _replaceToID(Map<String,Map<String,dynamic>> eventCollection)
+  Map<String,Map<String,dynamic>> go_replaceToID(Map<String,Map<String,dynamic>> eventCollection)
   {
     if (eventCollection==null) return eventCollection;
 
@@ -121,7 +121,7 @@ abstract class NameWrapperBase extends VMbase
   {
     Map<String,Map<String,dynamic>> eventCollection=msg[M_ReplaceToID.eventList];
 
-    var ec=_replaceToID(eventCollection);
+    var ec=go_replaceToID(eventCollection);
 
     if (ec!=null) postMsg({MSG.k_msgid:N_MSG.replaceToID
                           ,M_IDReplaced.eventList:ec});
@@ -132,15 +132,15 @@ abstract class NameWrapperBase extends VMbase
     Map<String,Map<String,dynamic>> leagueCollection=msg[M_updateNames.leagueNames];
     Map<String,Map<String,dynamic>> teamCollection=msg[M_ReplaceToID.eventList];
 
-    var upl=_updateLeagueNames(leagueCollection);
-    var upt=_updateTeamNames(teamCollection);
+    var upl=go_updateLeagueNames(leagueCollection);
+    var upt=go_updateTeamNames(teamCollection);
     if (upl!=null) postMsg({MSG.k_msgid:N_MSG.leagueNamesUpdated,
-                   M_leagueUpdated.leagueNames:upl});
+                            M_leagueUpdated.leagueNames:upl});
     if (upt!=null) postMsg({MSG.k_msgid:N_MSG.teamNamesUpdated,
-      M_teamUpdated.TeamNames:upt});
+                            M_teamUpdated.TeamNames:upt});
   }
 
-  Map<String,Map<String,dynamic>> _updateLeagueNames(Map<String,Map<String,dynamic>> leagueCollection)
+  Map<String,Map<String,dynamic>> go_updateLeagueNames(Map<String,Map<String,dynamic>> leagueCollection)
   {
     if (leagueCollection==null) return leagueCollection;
     var oldmap={};
@@ -160,7 +160,7 @@ abstract class NameWrapperBase extends VMbase
     return oldmap;
   }
 
-  Map<String,Map<String,dynamic>> _updateTeamNames(Map<String,Map<String,dynamic>> teamCollection)
+  Map<String,Map<String,dynamic>> go_updateTeamNames(Map<String,Map<String,dynamic>> teamCollection)
   {
     if (teamCollection==null) return teamCollection;
     var oldmap={};

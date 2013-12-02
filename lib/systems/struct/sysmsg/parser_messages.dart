@@ -1,7 +1,7 @@
 library psrmsg;
 
 // accepted messages
-const betOrder='betOrder';
-const focusOrder='betOrder';
-const oddsupdate='oddsupdate';
-const bethistory='bethistory';
+const parsebetOrder='parsebetOrder';
+const parsefocusOrder='parsefocusOrder';
+const parseoddsupdate='parseoddsupdate';
+const parsebethistory='parsebethistory';

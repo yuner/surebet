@@ -1,7 +1,7 @@
 library routerule;
 
 //import '../../vm.dart';
-import '../../../data/base.dart';
+//import '../../../data/base.dart';
 
  const k_rtcondition='_rtcondition';
  const k_rtexecution='_rtexecution';
@@ -13,7 +13,14 @@ import '../../../data/base.dart';
  {
    Function rtcondition;
    Function rtexecution;
-   IDkey rtsourcekey;
+   RegExp rtsourcekey;
+
+   Map<String,dynamic> toMap()
+   {
+     return {k_rtcondition:rtcondition
+       ,k_rtexecution:rtexecution
+       ,k_rtsourcekey:rtsourcekey.pattern};
+   }
  }
 
  class ExpandoMe<Tkey, Tval>
