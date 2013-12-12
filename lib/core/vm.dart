@@ -23,7 +23,7 @@ import 'struct/router/condbroker.dart' as CDB;
 import 'struct/router/execbroker.dart' as ECB;
 import 'struct/router/execresult.dart' as ECR;
 
-import 'func/nestobjecthelper.dart' as NestObject;
+//import 'func/nestobjecthelper.dart' as NestObject;
 import 'func/createinstancehelper.dart';
 
 part 'vm_router.dart';
@@ -149,7 +149,7 @@ void vm_main(Map<String,dynamic>initmsg)
                 ,MSG.k_srckey:_vm_context[MSG_INIT.vmKey]
                 ,MSG_ERROR.errKey:'vm_main:init'
                 ,MSG_ERROR.errString:'init message is null'
-                ,MSG_ERROR.errObject:initmsg},_vm_context);
+                ,MSG_ERROR.errMessage:initmsg},_vm_context);
     return;
   }
 
@@ -171,7 +171,7 @@ void vm_main(Map<String,dynamic>initmsg)
                   ,MSG.k_srckey:_vm_context[MSG_INIT.vmKey]
                   ,MSG_ERROR.errKey:'vm_main:instance'
                   ,MSG_ERROR.errString:'create instance failed'
-                  ,MSG_ERROR.errObject:initmsg},_vm_context);
+                  ,MSG_ERROR.errMessage:initmsg},_vm_context);
       return;
     }
 
@@ -204,7 +204,7 @@ void vm_main(Map<String,dynamic>initmsg)
                           ,MSG.k_srckey:_vm_context[MSG_INIT.vmKey]
                           ,MSG_ERROR.errKey:'vm_instance:process'
                           ,MSG_ERROR.errString:'cannot process message'
-                          ,MSG_ERROR.errObject:msg},_vm_context);
+                          ,MSG_ERROR.errMessage:msg},_vm_context);
             }
             return;
           }
@@ -213,7 +213,7 @@ void vm_main(Map<String,dynamic>initmsg)
                     ,MSG.k_srckey:_vm_context[MSG_INIT.vmKey]
                     ,MSG_ERROR.errKey:'vm_instance:context'
                     ,MSG_ERROR.errString:'vm context is not exist'
-                    ,MSG_ERROR.errObject:msg},_vm_context);
+                    ,MSG_ERROR.errMessage:msg},_vm_context);
 
     });
 
@@ -242,7 +242,7 @@ void vm_main(Map<String,dynamic>initmsg)
                   ,MSG.k_srckey:_vm_context[MSG_INIT.vmKey]
                   ,MSG_ERROR.errKey:'vm_main:ownerport'
                   ,MSG_ERROR.errString:'cannot report init result'
-                  ,MSG_ERROR.errObject:initmsg},_vm_context);
+                  ,MSG_ERROR.errMessage:initmsg},_vm_context);
     return;
   }
 
@@ -250,7 +250,7 @@ void vm_main(Map<String,dynamic>initmsg)
   reportError({MSG.k_msgid:INT_MSG.k__error
               ,MSG_ERROR.errKey:'vm_main:unhandled'
               ,MSG_ERROR.errString:'unhandled message'
-              ,MSG_ERROR.errObject:initmsg},_vm_context);
+              ,MSG_ERROR.errMessage:initmsg},_vm_context);
 }
 
 void reportError(dynamic errmsg,Map<String,dynamic> vm_context)

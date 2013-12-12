@@ -1,7 +1,7 @@
 
 library ydata;
 
-part 'sports.dart';
-part 'systems.dart';
+// part 'sports.dart';
+// part 'systems.dart';
 part 'idkey.dart';
 

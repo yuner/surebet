@@ -312,7 +312,7 @@ abstract class VMrouter implements VMinterface
                   ,MSG.k_msgexception:e
                   ,MSG_ERROR.errKey:'vm_router:condition'
                   ,MSG_ERROR.errString:'cannot eval message'
-                  ,MSG_ERROR.errObject:msg});
+                  ,MSG_ERROR.errMessage:msg});
               }
 
             if (rtexecution!=null)
@@ -334,7 +334,7 @@ abstract class VMrouter implements VMinterface
                   ,MSG.k_msgexception:e
                   ,MSG_ERROR.errKey:'vm_router:execution'
                   ,MSG_ERROR.errString:'cannot exec message'
-                  ,MSG_ERROR.errObject:msg});
+                  ,MSG_ERROR.errMessage:msg});
             }
           }
         }

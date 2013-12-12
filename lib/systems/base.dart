@@ -1,5 +1,6 @@
 library sysbase;
 
+import 'dart:io';
 
 import '../core/vm.dart';
 //import '../data/base.dart';
@@ -11,6 +12,8 @@ import '../data/struct/classes/sports/sportsleague.dart' as SL;
 import '../data/struct/classes/sports/sportsteam.dart' as ST;
 //import '../data/struct/classes/sports/sportsmarket.dart' as SM;
 //import '../data/struct/classes/sports/sportswager.dart' as SW;
+
+import '../data/struct/types/systemtype.dart' as TS;
 
 import 'struct/sysmsg/naming_messages.dart' as N_MSG;
 import 'struct/sysmsg/naming/replacetoid.dart' as M_ReplaceToID;

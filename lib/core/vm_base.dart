@@ -44,7 +44,7 @@ abstract class VMbase implements VMinterface
                             ,MSG.k_msgexception:e
                             ,MSG_ERROR.errKey:'vm_class:onMsg'
                             ,MSG_ERROR.errString:'cannot deliver message'
-                            ,MSG_ERROR.errObject:msg});
+                            ,MSG_ERROR.errMessage:msg});
       }
   }
 

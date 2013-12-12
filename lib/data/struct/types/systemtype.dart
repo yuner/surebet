@@ -9,16 +9,16 @@ import '../../base.dart';
 
  class SystemTypes
  {
-   static const _Sbo=const SystemTypes._(Sbo);
-   static const _Ibc=const SystemTypes._(Ibc);
-   static const _Pinnacle=const SystemTypes._(Pinnacle);
-   static const _Crown=const SystemTypes._(Crown);
+   static const c_Sbo=const SystemTypes._(Sbo);
+   static const c_Ibc=const SystemTypes._(Ibc);
+   static const c_Pinnacle=const SystemTypes._(Pinnacle);
+   static const c_Crown=const SystemTypes._(Crown);
 
    static final Map<IDkey,SystemTypes> _keylist={
-                              Sbo:_Sbo,
-                              Ibc:_Ibc,
-                              Pinnacle:_Pinnacle,
-                              Crown:_Crown
+                              Sbo:c_Sbo,
+                              Ibc:c_Ibc,
+                              Pinnacle:c_Pinnacle,
+                              Crown:c_Crown
    };
 
    final IDkey _key;

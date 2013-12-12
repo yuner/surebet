@@ -21,4 +21,14 @@ class SportsTeam
             ,k_TeamAliasNames:TeamAliasNames
             ,k_NameFilterRegExp:NameFilterRegExp.pattern};
   }
+
+  static SportsTeam fromMap(Map<String,dynamic> map)
+  {
+    return new SportsTeam()
+                ..SportsTeamID=map[k_SportsTeamID]
+                ..TeamDisplayName=map[k_TeamDisplayName]
+                ..TeamAliasNames=map[k_TeamAliasNames]
+                ..NameFilterRegExp=new RegExp(map[k_NameFilterRegExp]);
+  }
+
 }

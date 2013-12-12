@@ -55,7 +55,7 @@ class statusUpdated
 class sboWebclient extends WebclientBase
 {
 
-  sboWebclient()
+  sboWebclient([HttpClient client])
   {
 
     registerMsg(W_MSG.login, login);
@@ -65,19 +65,13 @@ class sboWebclient extends WebclientBase
     registerMsg(W_MSG.bet, bet);
     registerMsg(W_MSG.getodds, getodds);
 
-    statusNow=T_Status.statusType.types(T_Status.waiting);
+    statusNow=T_Status.statusType.c_free;
 
   }
 
   void login(Map<String,dynamic> msg)
   {
-    var user=msg[M_Login.userName];
-    var pass=msg[M_Login.passWord];
 
-
-    var newmsg={MSG.k_msgid:W_MSG.loginResult
-                ,M_LoginResult.succeedType:T_Succeed.loginOK};
-    postMsg(newmsg);
   }
 
   void logout(Map<String,dynamic> msg)

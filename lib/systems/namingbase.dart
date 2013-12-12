@@ -15,9 +15,9 @@ abstract class NameWrapperBase extends VMbase
 
     eventCollection.keys.forEach((key){
       var evt=eventCollection[key];
-      String league=evt[SE.LeagueName];
-      String hostTeam=evt[SE.HostTeamName];
-      String guestTeam=evt[SE.GuestTeamName];
+      String league=evt[SE.k_LeagueName];
+      String hostTeam=evt[SE.k_HostTeamName];
+      String guestTeam=evt[SE.k_GuestTeamName];
 
       var uleague=league.toUpperCase();
       var uhostTeam=hostTeam.toUpperCase();
@@ -108,9 +108,9 @@ abstract class NameWrapperBase extends VMbase
         }
       }
 
-      evt[SE.LeagueID]=leagueID;
-      evt[SE.HostTeamID]=hostTeamID;
-      evt[SE.GuestTeamID]=guestTeamID;
+      evt[SE.k_LeagueID]=leagueID;
+      evt[SE.k_HostTeamID]=hostTeamID;
+      evt[SE.k_GuestTeamID]=guestTeamID;
 
     });
 

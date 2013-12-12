@@ -1,3 +1,5 @@
 
 library loginResult;
-  const succeedType='succeedType';  //String:IDkey:[succeedType]
+  const ResultType='ResultType';  //String:IDkey:[ResultType]
+  const ReasonClass='ReasonClass';
+  const ExceptionClass='ExceptionClass';
